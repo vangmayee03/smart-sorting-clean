@@ -15,8 +15,10 @@ Features
   - Predict
   - Contact
   - Prediction Result Page
-
+    
+---
  Tech Stack
+ 
 
 - **Frontend**: HTML, CSS
 - **Backend**: Python, Flask
