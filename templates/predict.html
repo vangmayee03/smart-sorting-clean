@@ -4,9 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Predict - Nutrigaze</title>
-  <!-- Tailwind CSS for modern styling -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts for better typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -70,25 +68,36 @@
 </head>
 <body class="bg-gray-100">
 
-  <!-- Navigation Bar -->
   <nav class="bg-black bg-opacity-80 backdrop-blur-sm sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20">
-        <!-- Logo -->
-        <a href="#" class="text-2xl font-bold uppercase tracking-wider text-white">Nutrigaze</a>
+        <a href="{{ url_for('index') }}" class="text-2xl font-bold uppercase tracking-wider text-white">Nutrigaze</a>
         
-        <!-- Desktop Navigation Links -->
         <div class="hidden md:flex items-center space-x-8">
-          <a href="/" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Home</a>
-          <a href="/about" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">About</a>
-          <a href="/predict" class="text-white transition-colors duration-300 font-bold border-b-2 border-pink-500">Predict</a>
-          <a href="/contact" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Contact</a>
+          <a href="{{ url_for('index') }}" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Home</a>
+          <a href="{{ url_for('about') }}" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">About</a>
+          <a href="{{ url_for('predict') }}" class="text-white transition-colors duration-300 font-bold border-b-2 border-pink-500">Predict</a>
+          <a href="{{ url_for('contact') }}" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Contact</a>
+        </div>
+        
+        <div class="md:hidden">
+            <button id="mobile-menu-button" class="text-white focus:outline-none">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
         </div>
       </div>
     </div>
+    
+    <div id="mobile-menu" class="hidden md:hidden">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <a href="{{ url_for('index') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
+          <a href="{{ url_for('about') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</a>
+          <a href="{{ url_for('predict') }}" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Predict</a>
+          <a href="{{ url_for('contact') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+        </div>
+    </div>
   </nav>
 
-  <!-- Background Slideshow Container -->
   <div id="slideshow">
     <div></div>
     <div></div>
@@ -97,20 +106,15 @@
     <div></div>
   </div>
 
-  <!-- Main Content Area -->
   <main class="relative min-h-[calc(100vh-80px)] flex items-center justify-center p-4">
-    <!-- Dark overlay for text readability -->
     <div class="absolute inset-0 w-full h-full bg-black bg-opacity-50 z-0"></div>
 
-    <!-- Upload Form -->
     <div class="relative z-10 w-full max-w-lg">
-      <form class="bg-white bg-opacity-90 backdrop-blur-lg rounded-2xl shadow-2xl p-6 md:p-10 text-center" method="POST" enctype="multipart/form-data">
+      <form class="bg-white bg-opacity-90 backdrop-blur-lg rounded-2xl shadow-2xl p-6 md:p-10 text-center" action="{{ url_for('predict') }}" method="POST" enctype="multipart/form-data">
         <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">Check Your Produce</h2>
         <p class="text-gray-600 mb-6">Upload an image to analyze its freshness.</p>
 
-        <!-- Drag and Drop Area -->
         <label for="file-input" id="drag-area-label" class="drag-area w-full h-48 rounded-xl flex flex-col items-center justify-center cursor-pointer text-gray-500 hover:text-gray-700">
-          <!-- This is the initial state, shown before a file is selected -->
           <div id="initial-state">
             <svg class="mx-auto h-12 w-12" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
               <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -120,7 +124,6 @@
             </p>
             <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
           </div>
-          <!-- This is the preview state, shown after a file is selected -->
           <div id="preview-state" class="hidden w-full h-full flex flex-col items-center justify-center">
             <img id="image-preview" src="#" alt="Image Preview" class="max-h-32 rounded-lg"/>
             <p id="filename" class="text-sm text-gray-800 mt-2 font-medium"></p>
@@ -128,7 +131,6 @@
         </label>
         <input type="file" id="file-input" name="image" accept="image/*" required>
 
-        <!-- Predict Button -->
         <button type="submit" id="submit-button" class="w-full mt-6 bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-4 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:transform-none" disabled>
           Predict
         </button>
@@ -137,6 +139,7 @@
   </main>
 
   <script>
+    // --- DRAG AND DROP UPLOADER LOGIC ---
     const dragArea = document.getElementById('drag-area-label');
     const fileInput = document.getElementById('file-input');
     const initialState = document.getElementById('initial-state');
@@ -208,6 +211,14 @@
         }
       }
     }
+
+    // --- ADDED: MOBILE MENU TOGGLE ---
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
   </script>
 
 </body>
