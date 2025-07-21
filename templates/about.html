@@ -4,9 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About - Nutrigaze</title>
-  <!-- Tailwind CSS for modern styling -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts for better typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -55,32 +53,40 @@
 </head>
 <body class="bg-gray-100">
 
-  <!-- Navigation Bar -->
   <nav class="bg-black bg-opacity-80 backdrop-blur-sm sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20">
-        <!-- Logo -->
-        <a href="/" class="text-2xl font-bold uppercase tracking-wider text-white">Nutrigaze</a>
+        <a href="{{ url_for('index') }}" class="text-2xl font-bold uppercase tracking-wider text-white">Nutrigaze</a>
         
-        <!-- Desktop Navigation Links -->
         <div class="hidden md:flex items-center space-x-8">
-          <a href="/" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Home</a>
-          <!-- Active link styling applied to "About" -->
-          <a href="/about" class="text-white transition-colors duration-300 font-bold border-b-2 border-pink-500">About</a>
-          <a href="/predict" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Predict</a>
-          <a href="/contact" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Contact</a>
+          <a href="{{ url_for('index') }}" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Home</a>
+          <a href="{{ url_for('about') }}" class="text-white transition-colors duration-300 font-bold border-b-2 border-pink-500">About</a>
+          <a href="{{ url_for('predict') }}" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Predict</a>
+          <a href="{{ url_for('contact') }}" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Contact</a>
         </div>
+        
+        <div class="md:hidden">
+          <button id="mobile-menu-button" class="text-white focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden md:hidden">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="{{ url_for('index') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
+        <a href="{{ url_for('about') }}" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">About</a>
+        <a href="{{ url_for('predict') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Predict</a>
+        <a href="{{ url_for('contact') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</a>
       </div>
     </div>
   </nav>
 
-  <!-- Main Content Area -->
   <main class="min-h-[calc(100vh-80px)] flex items-center justify-center py-12 px-4 bg-gray-100">
-    <!-- About Section -->
     <div class="w-full max-w-6xl mx-auto">
       <div class="bg-white rounded-2xl shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-0">
         
-        <!-- Left Side: About the Project with Animated BG -->
         <div class="relative p-8 md:p-12 flex flex-col justify-center overflow-hidden animate-bg" style="background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1950&q=80');">
           <div class="absolute inset-0 w-full h-full bg-black bg-opacity-60 z-0"></div>
           <div class="relative z-10">
@@ -94,12 +100,10 @@
           </div>
         </div>
 
-        <!-- Right Side: Our Team Photos -->
         <div class="p-8 md:p-12 bg-white">
-           <h3 class="text-3xl font-bold text-gray-800 mb-8 text-center">Meet the Team</h3>
-           <div class="grid grid-cols-2 gap-x-6 gap-y-8">
-            
-            <!-- Team Member 1 -->
+          <h3 class="text-3xl font-bold text-gray-800 mb-8 text-center">Meet the Team</h3>
+          <div class="grid grid-cols-2 gap-x-6 gap-y-8">
+          
             <div class="text-center">
               <img 
                 src="https://i.postimg.cc/d305Gdhs/vang.jpg" 
@@ -110,7 +114,6 @@
               <p class="text-pink-600">Project Lead</p>
             </div>
 
-            <!-- Team Member 2 -->
             <div class="text-center">
               <img 
                 src="https://i.postimg.cc/fbcKS5Rn/prashu1.jpg"
@@ -122,7 +125,6 @@
               <p class="text-blue-600">Lead Developer</p>
             </div>
 
-            <!-- Team Member 3 -->
             <div class="text-center">
               <img 
                 src="https://i.postimg.cc/Jnh1H65G/deepthi1.jpg" 
@@ -134,7 +136,6 @@
               <p class="text-purple-600">Lead Developer</p>
             </div>
 
-            <!-- Team Member 4 -->
             <div class="text-center">
               <img 
                 src="https://i.postimg.cc/0NTTPVXT/sneha.jpg" 
@@ -146,12 +147,20 @@
               <p class="text-cyan-500">Lead Developer</p>
             </div>
 
-           </div>
+          </div>
         </div>
 
       </div>
     </div>
   </main>
+
+  <script>
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
 
 </body>
 </html>
