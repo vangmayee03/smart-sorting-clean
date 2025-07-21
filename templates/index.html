@@ -4,9 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nutrigaze - Home</title>
-  <!-- Tailwind CSS for modern styling -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts for better typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;800&display=swap" rel="stylesheet">
@@ -19,14 +17,11 @@
 </head>
 <body class="bg-gray-900 text-white">
 
-  <!-- Navigation Bar -->
   <nav class="bg-black bg-opacity-50 backdrop-blur-sm fixed w-full top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20">
-        <!-- Logo -->
         <a href="#" class="text-2xl font-bold uppercase tracking-wider text-white">Nutrigaze</a>
         
-        <!-- Desktop Navigation Links -->
         <div class="hidden md:flex items-center space-x-8">
           <a href="{{ url_for('index') }}" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Home</a>
           <a href="{{ url_for('about') }}" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">About</a>
@@ -34,28 +29,29 @@
           <a href="{{ url_for('contact') }}" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Contact</a>
         </div>
         
-    
-
-
-        <!-- Mobile Menu Button (optional, for future use) -->
         <div class="md:hidden">
-          <button class="text-white focus:outline-none">
+          <button id="mobile-menu-button" class="text-white focus:outline-none">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
           </button>
         </div>
       </div>
     </div>
+
+    <div id="mobile-menu" class="hidden md:hidden">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="{{ url_for('index') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
+        <a href="{{ url_for('about') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</a>
+        <a href="{{ url_for('predict') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Predict</a>
+        <a href="{{ url_for('contact') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+      </div>
+    </div>
   </nav>
 
-  <!-- Hero Section -->
   <div class="relative h-screen w-full flex items-center justify-center text-center overflow-hidden">
-    <!-- Background Image -->
     <div class="absolute top-0 left-0 w-full h-full bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1518843875459-f738682238a6?auto=format&fit=crop&w=1950&q=80');"></div>
     
-    <!-- Dark Overlay for Readability -->
     <div class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-60"></div>
     
-    <!-- Hero Content -->
     <div class="relative z-10 px-4">
       <p class="text-lg md:text-xl font-light text-gray-200 mb-2">
         Welcome to <span class="font-semibold text-white">NutriGaze</span>
@@ -71,6 +67,18 @@
       </a>
     </div>
   </div>
+
+  <script>
+    // Get the mobile menu button and the mobile menu itself
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    // Add a click event listener to the button
+    mobileMenuButton.addEventListener('click', () => {
+      // Toggle the 'hidden' class on the menu
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
 
 </body>
 </html>
