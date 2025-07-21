@@ -2,60 +2,111 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact - Nutrigaze</title>
+  <!-- Tailwind CSS for modern styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts for better typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    /* Applying the Inter font as the default */
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f9f9f9;
-      margin: 0;
-      padding: 0;
-    }
-    nav {
-      background: #000;
-      padding: 15px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo {
-      color: #fff;
-      font-weight: bold;
-      font-size: 20px;
-      text-decoration: none;
-    }
-    .nav-links a {
-      color: #fff;
-      margin-left: 20px;
-      text-decoration: none;
-    }
-    .contact-container {
-      padding: 60px;
-      text-align: center;
-    }
-    .contact-container h2 {
-      color: #f72585;
-      font-size: 32px;
-      margin-bottom: 20px;
-    }
-    .contact-container p {
-      font-size: 18px;
+      font-family: 'Inter', sans-serif;
     }
   </style>
 </head>
-<body>
-  <nav>
-    <a href="{{ url_for('index') }}" class="logo">Nutrigaze</a>
-    <div class="nav-links">
-      <a href="{{ url_for('index') }}">Home</a>
-      <a href="{{ url_for('about') }}">About</a>
-      <a href="{{ url_for('predict') }}">Predict</a>
-      <a href="{{ url_for('contact') }}">Contact</a>
+<body class="bg-gray-100">
+
+  <!-- Navigation Bar -->
+  <nav class="bg-black bg-opacity-80 backdrop-blur-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Logo -->
+        <a href="/" class="text-2xl font-bold uppercase tracking-wider text-white">Nutrigaze</a>
+        
+        <!-- Desktop Navigation Links -->
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="/" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Home</a>
+          <a href="/about" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">About</a>
+          <a href="/predict" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Predict</a>
+          <a href="/contact" class="text-white transition-colors duration-300 font-bold border-b-2 border-pink-500">Contact</a>
+        </div>
+      </div>
     </div>
   </nav>
 
-  <div class="contact-container">
-    <h2>Contact Us</h2>
-    <p>For queries or feedback, reach out at nutrigaze@example.com</p>
-  </div>
+  <!-- Main Content Area with Background -->
+  <main class="relative min-h-[calc(100vh-80px)] flex items-center justify-center py-12 px-4">
+    <!-- Background Image -->
+    <div class="absolute inset-0 w-full h-full bg-cover bg-center z-0" style="background-image: url('https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=1950&q=80');"></div>
+    <div class="absolute inset-0 w-full h-full bg-black bg-opacity-70 z-0"></div>
+
+    <!-- Contact Section -->
+    <div class="relative z-10 w-full max-w-5xl mx-auto">
+      <div class="bg-white bg-opacity-90 backdrop-blur-lg rounded-2xl shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2">
+        
+        <!-- Contact Information Side -->
+        <div class="p-8 md:p-12 bg-pink-600 text-white">
+          <h2 class="text-3xl font-bold mb-4">Get in Touch</h2>
+          <p class="mb-8 text-pink-100">
+            Have a question, feedback, or a partnership inquiry? We'd love to hear from you. Reach out to us, and we'll get back to you as soon as possible.
+          </p>
+          <div class="space-y-6">
+            <div class="flex items-start space-x-4">
+              <svg class="w-6 h-6 text-pink-200 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              <div>
+                <h3 class="font-semibold">Our Office</h3>
+                <p class="text-pink-100">123 Fresh Produce Lane, Harvest City, 54321</p>
+              </div>
+            </div>
+            <div class="flex items-start space-x-4">
+              <svg class="w-6 h-6 text-pink-200 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+              <div>
+                <h3 class="font-semibold">Email Us</h3>
+                <p class="text-pink-100">contact@nutrigaze.example.com</p>
+              </div>
+            </div>
+            <div class="flex items-start space-x-4">
+              <svg class="w-6 h-6 text-pink-200 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+              <div>
+                <h3 class="font-semibold">Call Us</h3>
+                <p class="text-pink-100">(123) 456-7890</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form Side -->
+        <div class="p-8 md:p-12">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">Send a Message</h2>
+          <form action="#" method="POST">
+            <div class="space-y-6">
+              <div>
+                <label for="name" class="font-medium text-gray-700">Full Name</label>
+                <input type="text" name="name" id="name" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500">
+              </div>
+              <div>
+                <label for="email" class="font-medium text-gray-700">Email Address</label>
+                <input type="email" name="email" id="email" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500">
+              </div>
+              <div>
+                <label for="message" class="font-medium text-gray-700">Message</label>
+                <textarea id="message" name="message" rows="5" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500"></textarea>
+              </div>
+              <div>
+                <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 transition-transform transform hover:scale-105">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
 </body>
 </html>
