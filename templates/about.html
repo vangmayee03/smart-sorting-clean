@@ -2,95 +2,156 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About - Nutrigaze</title>
+  <!-- Tailwind CSS for modern styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts for better typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    /* Applying the Inter font as the default */
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #fff;
-      color: #333;
-      margin: 0;
-      padding: 0;
+      font-family: 'Inter', sans-serif;
     }
-    nav {
-      background: #000;
-      padding: 15px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    /* --- ANIMATION KEYFRAMES FOR TEAM PHOTOS --- */
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+      50% {
+        transform: translateY(-10px);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      }
+      100% {
+        transform: translateY(0px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
     }
-    .logo {
-      color: #fff;
-      text-transform: uppercase;
-      font-weight: bold;
-      font-size: 20px;
-      text-decoration: none;
+
+    /* --- NEW ANIMATION KEYFRAMES FOR BACKGROUND SLIDE --- */
+    @keyframes bg-slide {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 100% 50%;
+      }
     }
-    .nav-links a {
-      color: #fff;
-      margin-left: 20px;
-      text-decoration: none;
+
+    /* --- ANIMATION CLASSES --- */
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
     }
-    .nav-links a.active {
-      border-bottom: 2px solid #f72585;
-    }
-    .about-section {
-      max-width: 900px;
-      margin: 60px auto;
-      text-align: center;
-      padding: 0 20px;
-    }
-    .about-section h2 {
-      color: #f72585;
-      font-size: 36px;
-    }
-    .about-section p {
-      margin: 10px auto;
-      font-size: 16px;
-      line-height: 1.6;
-    }
-    .tick {
-      color: #f72585;
-      font-weight: bold;
-    }
-    .learn-more-btn {
-      margin-top: 20px;
-      padding: 10px 20px;
-      border: 2px solid #f72585;
-      color: #f72585;
-      border-radius: 25px;
-      text-decoration: none;
-      display: inline-block;
-      font-weight: bold;
+    .animate-bg {
+      /* Set a larger background size to allow for sliding without showing edges */
+      background-size: 150% 150%;
+      /* Apply the new slide animation */
+      animation: bg-slide 40s linear infinite alternate;
     }
   </style>
 </head>
-<body>
-  <nav>
-    <a href="/" class="logo">Nutrigaze</a>
-    <div class="nav-links">
-      <a href="/">Home</a>
-      <a href="/about" class="active">About</a>
-      <a href="/predict">Predict</a>
-      <a href="/contact">Contact</a>
+<body class="bg-gray-100">
+
+  <!-- Navigation Bar -->
+  <nav class="bg-black bg-opacity-80 backdrop-blur-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Logo -->
+        <a href="/" class="text-2xl font-bold uppercase tracking-wider text-white">Nutrigaze</a>
+        
+        <!-- Desktop Navigation Links -->
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="/" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Home</a>
+          <!-- Active link styling applied to "About" -->
+          <a href="/about" class="text-white transition-colors duration-300 font-bold border-b-2 border-pink-500">About</a>
+          <a href="/predict" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Predict</a>
+          <a href="/contact" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Contact</a>
+        </div>
+      </div>
     </div>
   </nav>
 
-  <div class="about-section">
-    <h2>Learn More <span style="color:#f72585;">About Us</span></h2>
-    <p><strong>NutriGaze</strong> is a pioneering organization dedicated to enhancing the quality and safety of your fruits and vegetables.</p>
-    
-    <div style="display: flex; justify-content: space-around; text-align: left; margin-top: 30px;">
-      <div style="width: 45%;">
-        <p>Our team comprises innovative scientists, technologists, and agricultural experts committed to leveraging advanced detection technologies to ensure the produce you consume is fresh, healthy, and nutritious.</p>
-        <p class="tick">✔ Comprehensive analysis and grading of fruits and vegetables based on ripeness and nutritional content.</p>
-        <p class="tick">✔ Continuous monitoring of produce freshness from farm to table.</p>
-        <p class="tick">✔ Innovative solutions to minimize food waste by identifying and separating rotten produce early in the supply chain.</p>
-      </div>
-      <div style="width: 45%;">
-        <p>Our team is our greatest asset. We are a diverse group of experts in fields such as agricultural science, data analytics, software engineering, and food technology. Together, we bring a wealth of knowledge and experience to tackle the challenges of food quality and safety.</p>
-        <a href="#" class="learn-more-btn">Learn More</a>
+  <!-- Main Content Area -->
+  <main class="min-h-[calc(100vh-80px)] flex items-center justify-center py-12 px-4 bg-gray-100">
+    <!-- About Section -->
+    <div class="w-full max-w-6xl mx-auto">
+      <div class="bg-white rounded-2xl shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-0">
+        
+        <!-- Left Side: About the Project with Animated BG -->
+        <div class="relative p-8 md:p-12 flex flex-col justify-center overflow-hidden animate-bg" style="background-image: url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1950&q=80');">
+          <div class="absolute inset-0 w-full h-full bg-black bg-opacity-60 z-0"></div>
+          <div class="relative z-10">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">About Nutrigaze</h2>
+            <p class="text-gray-200 text-lg">
+              Nutrigaze is a smart tool that helps you check if your fruits and vegetables are fresh or rotten. Just upload a photo, and our technology will analyze it to give you an instant prediction.
+            </p>
+            <p class="text-gray-200 mt-4 text-lg">
+              Our goal is to reduce food waste and help everyone make healthier choices, ensuring confidence in the food you eat.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right Side: Our Team Photos -->
+        <div class="p-8 md:p-12 bg-white">
+           <h3 class="text-3xl font-bold text-gray-800 mb-8 text-center">Meet the Team</h3>
+           <div class="grid grid-cols-2 gap-x-6 gap-y-8">
+            
+            <!-- Team Member 1 -->
+            <div class="text-center">
+              <img 
+                src="https://i.postimg.cc/d305Gdhs/vang.jpg" 
+                alt="Team Member 1 Photo" 
+                class="w-32 h-32 mx-auto rounded-full object-cover animate-float"
+                onerror="this.onerror=null;this.src='https://placehold.co/400x400/cccccc/FFFFFF?text=Error';">
+              <h4 class="mt-4 text-xl font-semibold text-gray-800">K.Vangmayee</h4>
+              <p class="text-pink-600">Project Lead</p>
+            </div>
+
+            <!-- Team Member 2 -->
+            <div class="text-center">
+              <img 
+                src="https://i.postimg.cc/fbcKS5Rn/prashu1.jpg"
+                alt="Team Member 2 Photo" 
+                class="w-32 h-32 mx-auto rounded-full object-cover animate-float"
+                style="animation-delay: 1.5s;"
+                onerror="this.onerror=null;this.src='https://placehold.co/400x400/cccccc/FFFFFF?text=Error';">
+              <h4 class="mt-4 text-xl font-semibold text-gray-800">T.Prashanthi</h4>
+              <p class="text-blue-600">Lead Developer</p>
+            </div>
+
+            <!-- Team Member 3 -->
+            <div class="text-center">
+              <img 
+                src="https://i.postimg.cc/Jnh1H65G/deepthi1.jpg" 
+                alt="Team Member 3 Photo" 
+                class="w-32 h-32 mx-auto rounded-full object-cover animate-float"
+                style="animation-delay: 3s;"
+                onerror="this.onerror=null;this.src='https://placehold.co/400x400/cccccc/FFFFFF?text=Error';">
+              <h4 class="mt-4 text-xl font-semibold text-gray-800">T.Deepthi Reddy</h4>
+              <p class="text-purple-600">Lead Developer</p>
+            </div>
+
+            <!-- Team Member 4 -->
+            <div class="text-center">
+              <img 
+                src="https://i.postimg.cc/0NTTPVXT/sneha.jpg" 
+                alt="Team Member 4 Photo" 
+                class="w-32 h-32 mx-auto rounded-full object-cover animate-float"
+                style="animation-delay: 4.5s;"
+                onerror="this.onerror=null;this.src='https://placehold.co/400x400/cccccc/FFFFFF?text=Error';">
+              <h4 class="mt-4 text-xl font-semibold text-gray-800">K.Sneha</h4>
+              <p class="text-cyan-500">Lead Developer</p>
+            </div>
+
+           </div>
+        </div>
+
       </div>
     </div>
-  </div>
+  </main>
+
 </body>
 </html>
