@@ -2,100 +2,72 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prediction Result - Nutrigaze</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* Applying the Inter font as the default */
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
     }
-    /* Simple classes to be toggled by the backend template */
-    .result-healthy {
-        color: #10B981; /* Tailwind green-500 */
-        background-color: rgba(16, 185, 129, 0.1);
-        border-color: rgba(16, 185, 129, 0.3);
+    nav {
+      background: #000;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    .result-rotten {
-        color: #EF4444; /* Tailwind red-500 */
-        background-color: rgba(239, 68, 68, 0.1);
-        border-color: rgba(239, 68, 68, 0.3);
+    .logo {
+      color: #fff;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 20px;
+      text-decoration: none;
+    }
+    .nav-links a {
+      color: #fff;
+      margin-left: 20px;
+      text-decoration: none;
+    }
+    .result-box {
+      text-align: center;
+      margin-top: 80px;
+    }
+    .result-box h2 {
+      font-size: 2.5rem;
+      color: {{ 'green' if result == 'HEALTHY' else 'red' }};
+      text-transform: uppercase;
+    }
+    .result-box img {
+      margin-top: 30px;
+      max-width: 400px;
+      border-radius: 10px;
+      border: 5px solid #ccc;
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 30px;
+      text-decoration: none;
+      color: #f72585;
+      font-weight: bold;
     }
   </style>
 </head>
-<body class="bg-gray-100">
-
-  <nav class="bg-black bg-opacity-80 backdrop-blur-sm sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-20">
-        <a href="{{ url_for('index') }}" class="text-2xl font-bold uppercase tracking-wider text-white">Nutrigaze</a>
-        
-        <div class="hidden md:flex items-center space-x-8">
-          <a href="{{ url_for('index') }}" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Home</a>
-          <a href="{{ url_for('about') }}" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">About</a>
-          <a href="{{ url_for('predict') }}" class="text-white transition-colors duration-300 font-bold border-b-2 border-pink-500">Predict</a>
-          <a href="{{ url_for('contact') }}" class="text-gray-300 hover:text-white transition-colors duration-300 font-medium">Contact</a>
-        </div>
-
-        <div class="md:hidden">
-            <button id="mobile-menu-button" class="text-white focus:outline-none">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            </button>
-        </div>
-      </div>
-    </div>
-
-    <div id="mobile-menu" class="hidden md:hidden">
-        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <a href="{{ url_for('index') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
-          <a href="{{ url_for('about') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</a>
-          <a href="{{ url_for('predict') }}" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Predict</a>
-          <a href="{{ url_for('contact') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</a>
-        </div>
+<body>
+  <nav>
+    <a href="/" class="logo">Nutrigaze</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="{{ url_for('about') }}">About</a>
+      <a href="{{ url_for('predict') }}">Predict</a>
     </div>
   </nav>
 
-  <main class="relative min-h-[calc(100vh-80px)] flex items-center justify-center p-4">
-    <div class="absolute inset-0 w-full h-full bg-cover bg-center z-0" style="background-image: url('https://images.unsplash.com/photo-1619566636858-58a72a2a259a?auto=format&fit=crop&w=1950&q=80');"></div>
-    <div class="absolute inset-0 w-full h-full bg-black bg-opacity-60 z-0"></div>
-
-    <div class="relative z-10 w-full max-w-md">
-      <div class="bg-white bg-opacity-95 backdrop-blur-lg rounded-2xl shadow-2xl p-6 md:p-8 text-center transition-all duration-500 ease-in-out transform hover:scale-105 {{ 'result-healthy' if result == 'HEALTHY' else 'result-rotten' }}">
-        
-        <p class="font-semibold text-gray-500 mb-4 text-sm uppercase tracking-wider">Prediction Result</p>
-        
-        <img src="{{ image_url }}" alt="Uploaded Produce" class="w-full h-64 object-cover rounded-xl shadow-lg mb-6 border-4 {{ 'border-green-500/30' if result == 'HEALTHY' else 'border-red-500/30' }}">
-        
-        <h2 class="text-4xl md:text-5xl font-extrabold uppercase tracking-wider {{ 'text-green-600' if result == 'HEALTHY' else 'text-red-600' }}">
-          {{ result }}
-        </h2>
-        
-        <p class="text-gray-600 mt-3 mb-8">
-          {% if result == 'HEALTHY' %}
-            This produce appears to be fresh and safe to eat.
-          {% else %}
-            This produce appears to be rotten. We recommend discarding it.
-          {% endif %}
-        </p>
-        
-        <a href="{{ url_for('predict') }}" class="inline-flex items-center justify-center w-full bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 px-6 rounded-lg text-lg transition-all duration-300">
-          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-          Try Another Image
-        </a>
-      </div>
-    </div>
-  </main>
-
-  <script>
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    mobileMenuButton.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
-  </script>
-
+  <div class="result-box">
+    <h2>{{ result }}</h2>
+    <img src="{{ image_url }}" alt="Uploaded Image">
+    <br>
+    <a href="{{ url_for('predict') }}" class="back-link">← Try another image</a>
+  </div>
 </body>
 </html>
