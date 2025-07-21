@@ -12,7 +12,7 @@ UPLOAD_FOLDER = 'static/uploads'
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
-# Class labels mapping (simplified for this example)
+# Class labels mapping
 class_labels = {
     0: 'HEALTHY',
     1: 'ROTTEN'
@@ -28,11 +28,12 @@ def about():
 
 @app.route('/predict', methods=['GET', 'POST'])
 def predict():
+    # This block handles the POST request when a user uploads an image
     if request.method == 'POST':
-        file = request.files['image']
-        if file:
-            # Save the image
-            filename = str(uuid.uuid4()) + '.jpg'
+        file = request.files.get('image') # Use .get() for safer access
+        if file and file.filename != '':
+            # Save the image with a unique name
+            filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
             filepath = os.path.join(UPLOAD_FOLDER, filename)
             file.save(filepath)
 
@@ -44,15 +45,34 @@ def predict():
             # Predict
             prediction = model.predict(image)
             predicted_class = np.argmax(prediction)
-            result = class_labels[predicted_class % 2]  # 0: HEALTHY, 1: ROTTEN
+            result = class_labels[predicted_class % 2]
 
-            return render_template('portfolio-details.html', result=result, image_url=url_for('static', filename='uploads/' + filename))
+            # --- KEY CHANGE ---
+            # Instead of rendering, we redirect to a new 'result' page
+            # We pass the prediction data as URL parameters
+            return redirect(url_for('result', prediction_result=result, image_filename=filename))
+            
+    # If it's a GET request, just show the upload page
     return render_template('predict.html')
+
+# --- NEW ROUTE ---
+# This route is only for displaying the result page.
+@app.route('/result')
+def result():
+    # Get the data passed from the redirect
+    prediction = request.args.get('prediction_result')
+    filename = request.args.get('image_filename')
+    
+    # Create the full URL for the image to be used in the template
+    image_url = url_for('static', filename='uploads/' + filename)
+
+    # Render the result template with the data
+    return render_template('portfolio-details.html', result=prediction, image_url=image_url)
+
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     if request.method == 'POST':
-        # You can log the message or email it
         name = request.form['name']
         email = request.form['email']
         message = request.form['message']
